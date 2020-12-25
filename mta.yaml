@@ -1,0 +1,75 @@
+_schema-version: "3.2"
+ID: DocumentCentricApprovalProcess
+version: 0.0.5
+modules:
+- name: DocumentCentricApprovalProcess_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: DocumentCentricApprovalProcess_html5_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+        - DocumentCentricStartUI-content.zip
+      name: DocumentCentricStartUI
+      target-path: resources/
+    - artifacts:
+        - DocumentCentricTaskUI-content.zip
+      name: DocumentCentricTaskUI
+      target-path: resources/
+    - artifacts:
+        - DocumentCentricReworkUI-content.zip
+      name: DocumentCentricReworkUI
+      target-path: resources/
+- name: DocumentCentricStartUI
+  type: html5
+  path: DocumentCentricStartUI
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: DocumentApproval
+  type: com.sap.application.content
+  path: DocumentApproval
+  requires:
+  - name: wm_workflow
+    parameters:
+      content-target: true
+- name: DocumentCentricTaskUI
+  type: html5
+  path: DocumentCentricTaskUI
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: DocumentCentricReworkUI
+  type: html5
+  path: DocumentCentricReworkUI
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+
+resources:
+- name: DocumentCentricApprovalProcess_html5_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: wm_workflow
+  type: org.cloudfoundry.existing-service
+  parameters:
+    service: workflow
+    service-plan: lite
+
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install
