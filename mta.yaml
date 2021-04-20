@@ -1,6 +1,6 @@
 _schema-version: "3.2"
 ID: DocumentCentricApprovalProcess
-version: 0.0.5
+version: 0.0.6
 modules:
 - name: DocumentCentricApprovalProcess_ui_deployer
   type: com.sap.application.content
@@ -24,9 +24,21 @@ modules:
         - DocumentCentricReworkUI-content.zip
       name: DocumentCentricReworkUI
       target-path: resources/
+    - artifacts:
+        - CITS-content.zip
+      name: CITS
+      target-path: resources/
 - name: DocumentCentricStartUI
   type: html5
   path: DocumentCentricStartUI
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: CITS
+  type: html5
+  path: CITS
   build-parameters:
     builder: custom
     commands:

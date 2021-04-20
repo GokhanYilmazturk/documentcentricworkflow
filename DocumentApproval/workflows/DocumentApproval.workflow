@@ -208,6 +208,11 @@
 				"93804803-b93c-4188-a771-8596a4105415": {}
 			}
 		},
+		"ec9cd427-bdc5-4bff-a77c-ef6d2f7a19ca": {
+			"classDefinition": "com.sap.bpm.wfs.EndEvent",
+			"id": "endevent2",
+			"name": "EndEvent2"
+		},
 		"2640bbc5-8457-45c5-a109-cd3f2bdc16c8": {
 			"classDefinition": "com.sap.bpm.wfs.ScriptTask",
 			"reference": "/scripts/DocumentApproval/Initialize.js",
@@ -236,6 +241,7 @@
 			"subject": "Approval for Request ${context.Title}  ${context.RequestId}",
 			"priority": "MEDIUM",
 			"isHiddenInLogForParticipant": false,
+			"supportsForward": false,
 			"userInterface": "sapui5://comsapbpmDocumentCentricTaskUI/com.sap.bpm.DocumentCentricTaskUI",
 			"recipientUsers": "${context.step.approvalStepData.ApproverUserName}",
 			"userInterfaceParams": [],
@@ -279,6 +285,7 @@
 			"subject": "Rework Required for Request  ${context.Title}  ${context.RequestId} ",
 			"priority": "MEDIUM",
 			"isHiddenInLogForParticipant": false,
+			"supportsForward": false,
 			"userInterface": "sapui5://comsapbpmDocumentCentricReworkUI/com.sap.bpm.DocumentCentricReworkUI",
 			"recipientUsers": "${context.Requester.UserId} ",
 			"id": "usertask2",
@@ -464,6 +471,13 @@
 			"name": "SequenceFlow37",
 			"sourceRef": "ef8256fa-e30e-449e-8aa4-49a55464bf93",
 			"targetRef": "8402446e-8c91-414e-baee-ca92d595c2d1"
+		},
+		"7b1b114f-3507-44db-b7b7-ca8d29f65c3d": {
+			"classDefinition": "com.sap.bpm.wfs.SequenceFlow",
+			"id": "sequenceflow41",
+			"name": "SequenceFlow41",
+			"sourceRef": "8402446e-8c91-414e-baee-ca92d595c2d1",
+			"targetRef": "ec9cd427-bdc5-4bff-a77c-ef6d2f7a19ca"
 		},
 		"42fa7a2d-c526-4a02-b3ba-49b5168ba644": {
 			"classDefinition": "com.sap.bpm.wfs.ui.Diagram",
@@ -807,6 +821,21 @@
 			"targetSymbol": "bc3d3665-c0a3-4b84-a0d8-5339f99ffc25",
 			"object": "baab2024-a604-48e5-b924-1de3619f0b9d"
 		},
+		"d25eef97-1136-4c3c-80a6-42c75917b747": {
+			"classDefinition": "com.sap.bpm.wfs.ui.EndEventSymbol",
+			"x": 750.0625,
+			"y": 286.9375,
+			"width": 35,
+			"height": 35,
+			"object": "ec9cd427-bdc5-4bff-a77c-ef6d2f7a19ca"
+		},
+		"b6965c90-dca1-4bcb-afa0-c5bee84dbe32": {
+			"classDefinition": "com.sap.bpm.wfs.ui.SequenceFlowSymbol",
+			"points": "767.8125,225.4375 767.8125,304.4375",
+			"sourceSymbol": "bc3d3665-c0a3-4b84-a0d8-5339f99ffc25",
+			"targetSymbol": "d25eef97-1136-4c3c-80a6-42c75917b747",
+			"object": "7b1b114f-3507-44db-b7b7-ca8d29f65c3d"
+		},
 		"7a3352f0-5d28-4065-9d97-c25451b2ef06": {
 			"classDefinition": "com.sap.bpm.wfs.ui.BoundaryEventSymbol",
 			"x": 752.0625,
@@ -876,33 +905,6 @@
 			"subject": "Approval requested for \"${context.Title}\"",
 			"text": "Dear ${context.step.approvalStepData.ApproverFirstName} ${context.step.approvalStepData.ApproverLastName},\n\nYou are assigned as the approver for the step \"${context.step.approvalStepData.StepName}\" of the request \"${context.Title}\", request ID: ${context.RequestId}. Please submit your decision regarding this request before ${context.step.approvalStepData.DueDateFormatted}.\n\nThank you!",
 			"id": "maildefinition6"
-		},
-		"ec9cd427-bdc5-4bff-a77c-ef6d2f7a19ca": {
-			"classDefinition": "com.sap.bpm.wfs.EndEvent",
-			"id": "endevent2",
-			"name": "EndEvent2"
-		},
-		"d25eef97-1136-4c3c-80a6-42c75917b747": {
-			"classDefinition": "com.sap.bpm.wfs.ui.EndEventSymbol",
-			"x": 750.0625,
-			"y": 286.9375,
-			"width": 35,
-			"height": 35,
-			"object": "ec9cd427-bdc5-4bff-a77c-ef6d2f7a19ca"
-		},
-		"7b1b114f-3507-44db-b7b7-ca8d29f65c3d": {
-			"classDefinition": "com.sap.bpm.wfs.SequenceFlow",
-			"id": "sequenceflow41",
-			"name": "SequenceFlow41",
-			"sourceRef": "8402446e-8c91-414e-baee-ca92d595c2d1",
-			"targetRef": "ec9cd427-bdc5-4bff-a77c-ef6d2f7a19ca"
-		},
-		"b6965c90-dca1-4bcb-afa0-c5bee84dbe32": {
-			"classDefinition": "com.sap.bpm.wfs.ui.SequenceFlowSymbol",
-			"points": "767.8125,225.4375 767.8125,304.4375",
-			"sourceSymbol": "bc3d3665-c0a3-4b84-a0d8-5339f99ffc25",
-			"targetSymbol": "d25eef97-1136-4c3c-80a6-42c75917b747",
-			"object": "7b1b114f-3507-44db-b7b7-ca8d29f65c3d"
 		}
 	}
 }
